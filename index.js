@@ -1,7 +1,7 @@
 var postcss = require('postcss');
 
 var DEFAULTS = {
-  base: 16,
+  times: 16,
 };
 
 function nonForcedNumericRegex(number) {
@@ -9,8 +9,8 @@ function nonForcedNumericRegex(number) {
   return new RegExp(number + 'px(?!\\s*\\/\\*\\s*force\\s*\\*\\/)', 'g');
 }
 
-module.exports = postcss.plugin('postcss-px-to-em', function (opts) {
-  opts = extend({}, DEFAULTS, opts);
+module.exports = postcss.plugin('postcss-px-to-px', function (opts) {
+  var times = opts.times || DEFAULTS.times;
 
   var minPixelValue = opts.minPixelValue || 0;
   var regex = /([\d\.]+)px(\s*\/\*\s*force\s*\*\/)?/g;
@@ -26,7 +26,7 @@ module.exports = postcss.plugin('postcss-px-to-em', function (opts) {
         // if the value is not forced to be pixels, let's replace any matching
         if (!matches[2]) {
           if(matches[1]>= minPixelValue){
-            context = context.replace(nonForcedNumericRegex(matches[1]), matches[1] / opts.base + 'em');
+            context = context.replace(nonForcedNumericRegex(matches[1]), matches[1] / times + 'px');
           }
         }
       });

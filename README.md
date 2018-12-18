@@ -1,72 +1,52 @@
-# PostCSS px To em [![Build Status][ci-img]][ci]
+## postcss-px-to-px
 
-Fork from ['postcss-px-to-em'](https://github.com/macropodhq/postcss-px-to-em)
+[![NPM version][npm-image]][npm-url]
 
-[PostCSS] plugin to convert all `px` measurements to `em`.
+### 一、简介
 
-```css
-.foo {
-  width: 270px;
-  margin: 0 15px;
-  padding: 1em;
+基于`postcss` 转换 `px` 到 `px`,主要用于解决在不同设计稿下，统一转换像素值。
 
-  /* you can override pixel replacement by adding a "force" *
-   * comment after the pixel measurement you want to keep.  */
-  border-radius: 10px /*force*/ 16px;
-}
+### 二、安装
 
-@media (min-width: 640px) {
-  /* doesn't change pixel values used for media queries, as this wouldn't work properly */
-  .foo {
-    width: 100%;
-    padding: 10px;
-  }
-}
-```
+    npm install postcss-px-to-px --save-dev
 
-```css
-.foo {
-  width: 16.875em;
-  margin: 0 0.9375em;
-  padding: 1em;
+### 三、使用
 
-  /* you can override pixel replacement by adding a "force" *
-   * comment after the pixel measurement you want to keep.  */
-  border-radius: 10px /*force*/ 1em;
-}
-
-@media (min-width: 640px) {
-  /* doesn't change pixel values used for media queries, as this wouldn't work properly */
-  .foo {
-    width: 100%;
-    padding: 0.625em;
-  }
-}
-```
-
-## Rationale
-
-For [Bugherd], we needed to be able to scale our UIs to fit any zoom level on Mobile. To enable this, we change the parents' `font-size` and use `em` measurements relative to the base font size (usually `16px`) in our components. This PostCSS plugin facilitates this, without requiring us to rewrite all our code to use `em` manually.
-
-## Usage
-
-Plug it into your PostCSS configuration.
+Webpack 简单配置
 
 ```js
-var options = {
-  base: 16, // Base font size; 16px by default
-  minPixelValue:0,//   (Number) Set the minimum pixel value to replace.
-};
+var pxtopx  = require('postcss-px-to-px');
 
-//minPixelValue:2 dont convert 1px to em
-
-// Options may be supplied as the first argument, but are not required.
-postcss([require('postcss-px-to-em')(options)])
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(css|scss)$/i,
+        include: /antd|antd-mobile/,
+        use: [
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                autoprefixer({
+                  browsers: ['iOS >= 8', 'Android >= 4'],
+                }),
+                // 2px =  2 * times(2)  = 4 px;
+                pxtopx({ times: 2 }),
+              ],
+            },
+          },
+        ]
+      }
+    ]
+  }
+}
 ```
 
-See PostCSS docs for examples for your environment.
+### 四、开源许可
 
-[Bugherd]: https://macropod.com/bugherd
-[PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/macropodhq/postcss-px-to-em.svg
-[ci]:      https://travis-ci.org/macropodhq/postcss-px-to-em
+基于 [MIT License](http://zh.wikipedia.org/wiki/MIT_License) 开源，使用代码只需说明来源，或者引用 [license.txt](https://github.com/sofish/typo.css/blob/master/license.txt) 即可。
+
+[npm-url]: https://www.npmjs.com/package/postcss-px-to-px
+[npm-image]: https://img.shields.io/npm/v/postcss-px-to-px.svg

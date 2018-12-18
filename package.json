@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Beven91/postcss-px-to-px/issues"
   },
+  "peerDependencies": {
+    "postcss": "^4.1.13"
+  },
   "homepage": "https://github.com/Beven91/postcss-px-to-px#readme"
 }
