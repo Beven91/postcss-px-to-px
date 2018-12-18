@@ -1,0 +1,23 @@
+{
+  "name": "postcss-px-to-px",
+  "version": "1.0.0",
+  "description": "Fork from ['postcss-px-to-em'](https://github.com/macropodhq/postcss-px-to-em)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beven91/postcss-px-to-px.git"
+  },
+  "keywords": [
+    "postcss",
+    "px"
+  ],
+  "author": "beven",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Beven91/postcss-px-to-px/issues"
+  },
+  "homepage": "https://github.com/Beven91/postcss-px-to-px#readme"
+}
