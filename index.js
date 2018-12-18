@@ -26,7 +26,7 @@ module.exports = postcss.plugin('postcss-px-to-px', function (opts) {
         // if the value is not forced to be pixels, let's replace any matching
         if (!matches[2]) {
           if(matches[1]>= minPixelValue){
-            context = context.replace(nonForcedNumericRegex(matches[1]), matches[1] / times + 'px');
+            context = context.replace(nonForcedNumericRegex(matches[1]), matches[1] * times + 'px');
           }
         }
       });
