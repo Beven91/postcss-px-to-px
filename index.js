@@ -36,6 +36,10 @@ module.exports = postcss.plugin('postcss-px-to-px', function (opts) {
   };
 
   return function (css) {
+    var filter = opts.include;
+    if(typeof filter === 'function' && !filter(css.source.input.file)){
+      return;
+    }
     css.walk(function(node) {
       if (node.type === 'decl') {
         node.value = convert(node._value ? node._value.raw : node.value);

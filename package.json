@@ -1,6 +1,6 @@
 {
   "name": "postcss-px-to-px",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fork from ['postcss-px-to-em'](https://github.com/macropodhq/postcss-px-to-em)",
   "main": "index.js",
   "scripts": {
