@@ -29,9 +29,6 @@ module.exports = {
             options: {
               ident: 'postcss',
               plugins: () => [
-                autoprefixer({
-                  browsers: ['iOS >= 8', 'Android >= 4'],
-                }),
                 // 2px =  2 * times(2)  = 4 px;
                 pxtopx({ times: 2 }),
               ],
